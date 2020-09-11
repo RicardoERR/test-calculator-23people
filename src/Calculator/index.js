@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import './index.css';
 /**
  * This will be the Calculator component, it could have the property initialValue that would initialize the calculator with a custom value insted of 0.
  */

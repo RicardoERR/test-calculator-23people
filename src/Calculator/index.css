@@ -1,0 +1,81 @@
+.App{
+    text-align: center;
+    text-align: -webkit-center;
+}
+.calculator {
+    display: flex;
+    flex-flow: wrap row;
+    max-width: fit-content;
+    background-color: #252525;
+    padding: 10px 0 10px 0;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 4px 5px #999;
+}
+#result{
+    width:80%;
+    height: 60%;
+    font-size: x-large;
+    text-align: end;
+}
+.calculator__results{
+    flex:100%;
+    height: 50px;
+}
+.calculator__buttons{
+    width: 90%;
+    height: 30%;
+    padding: 4%;
+    flex-flow: wrap row;
+    text-align: center;
+    justify-content: space-between;
+}
+.operation_buttons,.numeric_buttons,.util_buttons{
+    display: flex;
+    flex-flow: wrap row;
+    text-align: center;
+    padding: 1% 5% 1% 5%;
+    justify-content: space-between;
+}
+.operation_button,.numeric_button,.util_button{
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 2px #999;
+    opacity: 0.9;
+    transition: 0.2s;
+    color: white;
+    cursor: pointer;
+    flex-grow: 1;
+    min-width: 33%;
+    height: 50px;
+    margin-bottom: 2%;
+}
+.util_button{
+    background-color: #A0ACBD;
+}
+.operation_button{
+    background-color: #00C9A9;
+}
+.numeric_button{
+    background-color: #4b4e5c;
+}
+/* Here we add the style for the calculator app on a desktop view */
+@media only screen and (min-width: 992px) {
+
+.calculator__buttons{
+    flex: 100%;
+    justify-content: space-between;
+}
+#result{
+    width:70%;
+    height: 50%;
+    text-align: end;
+}
+.operation_button:hover, .util_button:hover, .numeric_button:hover{
+    opacity: 1;
+}
+.operation_button:active, .util_button:active, .numeric_button:active {
+    box-shadow: 4px 5px #666;
+    transform: translateY(4px);
+  }
+}
