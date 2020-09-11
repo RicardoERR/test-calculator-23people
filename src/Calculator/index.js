@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import './index.css';
+import "./index.css";
+import { create, all } from "mathjs";
 /**
  * This will be the Calculator component, it could have the property initialValue that would initialize the calculator with a custom value insted of 0.
  */
@@ -86,6 +87,41 @@ const Calculator = (props) => {
         break;
     }
   };
+  //This will be the logical of the Calculator, all the process will be evaluated by the library mathjs.
+  const math = create(all);
+  const MathOperator = (buttonpressed) => {
+    switch (buttonpressed) {
+      case ".": {
+        setOperation(operation + buttonpressed);
+        break;
+      }
+      case "=": {
+        try {
+          setOperation(math.evaluate(operation).toString());
+          console.log(operation);
+        } catch {
+          setOperation("Syntax Error");
+        }
+        break;
+      }
+      case "C": {
+        setOperation("0");
+        break;
+      }
+      case "←": {
+        operation.length === 1
+          ? setOperation("0")
+          : setOperation(operation.slice(0, -1));
+        break;
+      }
+      default: {
+        operation === "0"
+          ? setOperation(buttonpressed)
+          : setOperation(operation + buttonpressed);
+        break;
+      }
+    }
+  };
   return (
     <div className="calculator">
       <div className="calculator__results">
@@ -102,7 +138,11 @@ const Calculator = (props) => {
         <div className="operation_buttons">
           {OrderCalculator("operation").map((button) => {
             return (
-              <button key={button.toString()} className="operation_button">
+              <button
+                key={button.toString()}
+                className="operation_button"
+                onClick={() => MathOperator(button)}
+              >
                 {button}
               </button>
             );
@@ -111,7 +151,11 @@ const Calculator = (props) => {
         <div className="numeric_buttons">
           {OrderCalculator("numeric").map((button) => {
             return (
-              <button key={button.toString()} className="numeric_button">
+              <button
+                key={button.toString()}
+                className="numeric_button"
+                onClick={() => MathOperator(button)}
+              >
                 {button}
               </button>
             );
@@ -120,7 +164,11 @@ const Calculator = (props) => {
         <div className="util_buttons">
           {OrderCalculator("utils").map((button) => {
             return (
-              <button key={button.toString()} className="util_button">
+              <button
+                key={button.toString()}
+                className="util_button"
+                onClick={() => MathOperator(button)}
+              >
                 {button}
               </button>
             );
