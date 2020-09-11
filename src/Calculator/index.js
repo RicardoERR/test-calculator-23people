@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./index.css";
 import { create, all } from "mathjs";
@@ -32,6 +32,22 @@ const Calculator = (props) => {
   const [operation, setOperation] = useState(
     props.initialValue ? props.initialValue : "0"
   );
+  //Add a state for errors or infinity results.
+  const [hasFailed, setHasfailed] = useState(false);
+  useEffect(() => {
+    console.count("counter");
+    if (hasFailed) {
+      //If fails, restart calculator to 0.
+      setHasfailed(false);
+      setOperation("0");
+      return;
+    }
+    if (
+      operation.toLowerCase() === "syntax error" ||
+      operation.toLowerCase() === "infinity"
+    )
+      setHasfailed(true);
+  }, [operation]);
   //Let's order the buttons, divided by numeric and non-numeric values.
   //If someone wants to add buttons all it takes is to add it to the button_values array, but if it's an util button and not an operation one, it has to be added to the util_buttons array and code it's logic on the switch.
   const OrderCalculator = (type) => {
@@ -98,7 +114,6 @@ const Calculator = (props) => {
       case "=": {
         try {
           setOperation(math.evaluate(operation).toString());
-          console.log(operation);
         } catch {
           setOperation("Syntax Error");
         }
