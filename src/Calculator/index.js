@@ -75,7 +75,7 @@ const Calculator = (props) => {
           }
           i++;
         }
-        array_final = [].concat.apply([], array_final);
+        array_final = [].concat(...array_final);
         //We do it this way so it gives the standard 789 -> first row,456 -> second row,123 -> third row, 0 -> fourth row format, instead of just an ordered 1234...
         return array_final;
       }
@@ -95,7 +95,7 @@ const Calculator = (props) => {
             aux_array.push(non_numeric_buttons.splice(pos_button_util, 1));
           }
         }
-        array_final = [].concat.apply([], aux_array);
+        array_final = [].concat(...aux_array);
         return array_final;
       }
       default:
