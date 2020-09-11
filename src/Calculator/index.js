@@ -35,7 +35,6 @@ const Calculator = (props) => {
   //Add a state for errors or infinity results.
   const [hasFailed, setHasfailed] = useState(false);
   useEffect(() => {
-    console.count("counter");
     if (hasFailed) {
       //If fails, restart calculator to 0.
       setHasfailed(false);
